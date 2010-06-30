@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<application xmlns="http://ns.adobe.com/air/application/2.0">
+	<id>com.kevincao.apps.HanFont</id>
+	<name>HanFont</name>
+	<version>1.0</version>
+	<filename>HanFont</filename>
+	<description>
+		<text xml:lang="en">HanFont</text>
+	</description>
+	<copyright>Copyright 2010, KevinCao.com</copyright>
+	<!--<supportedProfiles>extendedDesktop desktop</supportedProfiles>-->
+	<initialWindow>
+		<content>HanFont.swf</content>
+		<systemChrome>none</systemChrome>
+		<visible>true</visible>
+		<width>550</width>
+		<height>680</height>
+	</initialWindow>
+	<installFolder>HanFont</installFolder>
+	<programMenuFolder>HanFont</programMenuFolder>	
+</application>
