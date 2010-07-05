@@ -1,9 +1,13 @@
 package  
 {
+	import controllers.ShowAboutCommand;
+
+	import views.AboutMediator;
+	import views.AboutView;
 	import controllers.CloseSettingCommand;
 	import controllers.CompileCommand;
 	import controllers.InitModelCommand;
-	import controllers.SaveCommand;
+	import controllers.SaveConfigCommand;
 	import controllers.ShowSettingCommand;
 	import controllers.StartupCommand;
 
@@ -48,12 +52,14 @@ package
 			
 			mediatorMap.mapView(AppView, AppMediator);			mediatorMap.mapView(SettingView, SettingMediator);
 			mediatorMap.mapView(BarView, BarMediator);
+			mediatorMap.mapView(AboutView, AboutMediator);
 			
 			commandMap.mapEvent(ContextEvent.STARTUP_COMPLETE, StartupCommand, ContextEvent);			commandMap.mapEvent(ContextEvent.STARTUP_COMPLETE, InitModelCommand, ContextEvent);
 			commandMap.mapEvent(AppEvent.SHOW_SETTING, ShowSettingCommand, AppEvent);
 			commandMap.mapEvent(AppEvent.CLOSE_SETTING, CloseSettingCommand, AppEvent);
+			commandMap.mapEvent(AppEvent.SHOW_ABOUT, ShowAboutCommand, AppEvent);
 			commandMap.mapEvent(CompileEvent.COMPILE_REQUEST, CompileCommand, CompileEvent);
-			commandMap.mapEvent(SaveEvent.SAVE, SaveCommand);
+			commandMap.mapEvent(SaveEvent.SAVE, SaveConfigCommand);
 			
 			super.startup();
 		}

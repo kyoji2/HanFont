@@ -2,4 +2,5 @@ package events{	import flash.events.Event;	/**	 * @author Kevin Cao	 */	p
 		public static const COMPILE_SUCCESS : String = "compileSuccess";
 		public static const COMPILE_FAIL : String = "compileFail";
 		public static const SETTING_CHANGE : String = "settingChange";
+		public static const SHOW_ABOUT : String = "showAbout";
 		public function AppEvent(type : String) 		{			super(type);		}		override public function toString() : String 		{			return formatToString("AppEvent", "type", "bubbles", "cancelable", "eventPhase");		}		override public function clone() : Event 		{			return new AppEvent(type);		}	}}

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <application xmlns="http://ns.adobe.com/air/application/2.0">
 	<id>com.kevincao.apps.HanFont</id>
-	<name>HanFont</name>
-	<version>1.0</version>
-	<filename>HanFont</filename>
+	<name>Flash汉字嵌入助手</name>
+	<version>3.0</version>
+	<filename>Flash汉字嵌入助手</filename>
 	<description>
 		<text xml:lang="en">HanFont</text>
-		<text xml:lang="cn">Flash中文字体嵌入助手</text>
+		<text xml:lang="cn">Flash汉字嵌入助手</text>
 	</description>
 	<copyright>Copyright 2010, KevinCao.com</copyright>
 	<supportedProfiles>extendedDesktop desktop</supportedProfiles>
@@ -25,5 +25,4 @@
 	    <image128x128>icons/128.png</image128x128>
 	</icon>
 	<installFolder>HanFont</installFolder>
-	<programMenuFolder>HanFont</programMenuFolder>	
 </application>

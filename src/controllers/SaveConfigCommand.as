@@ -14,7 +14,7 @@ package controllers
 	/**
 	 * @author Kevin Cao
 	 */
-	public class SaveCommand extends Command 
+	public class SaveConfigCommand extends Command 
 	{
 
 		[Inject]

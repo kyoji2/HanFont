@@ -40,6 +40,11 @@ package views
 					// 关闭窗口
 					contextView.stage.nativeWindow.close();
 					break;
+					
+				case view.title:
+					// 关于
+					dispatch(new AppEvent(AppEvent.SHOW_ABOUT));
+					break;
 			}
 		}
 

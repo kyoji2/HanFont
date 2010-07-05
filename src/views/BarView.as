@@ -1,5 +1,7 @@
 package views 
 {
+	import com.greensock.TweenMax;
+
 	import assets.BarSymbol;
 
 	import flash.display.DisplayObject;
@@ -16,6 +18,7 @@ package views
 			setting_btn.buttonMode = true;
 			min_btn.buttonMode = true;
 			close_btn.buttonMode = true;
+			title.buttonMode = true;
 			
 			addEventListener(MouseEvent.MOUSE_OVER, mouseOverHandler);
 			addEventListener(MouseEvent.MOUSE_OUT, mouseOutHandler);
@@ -30,6 +33,9 @@ package views
 				case close_btn:
 					DisplayObject(event.target).filters = [new GlowFilter(0x9f9f9f, 1, 3, 3)];
 					break;
+				case title:
+					TweenMax.to(event.target, .1, {colorTransform:{brightness:1.5}});
+					break;
 			}
 		}
 
@@ -41,6 +47,9 @@ package views
 				case min_btn:
 				case close_btn:
 					DisplayObject(event.target).filters = null;
+					break;
+				case title:
+					TweenMax.to(event.target, .1, {colorTransform:{brightness:1}});
 					break;
 			}
 		}
