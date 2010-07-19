@@ -18,8 +18,7 @@ package views
 		override public function onRegister() : void 
 		{
 			addViewListener(MouseEvent.CLICK, clickHandler);
-			
-			eventMap.mapListener(view, MouseEvent.MOUSE_DOWN, mouseDownHandler, MouseEvent);
+			addViewListener(MouseEvent.MOUSE_DOWN, mouseDownHandler);
 		}
 
 		private function clickHandler(event : MouseEvent) : void 
