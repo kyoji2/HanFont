@@ -1,0 +1,103 @@
+﻿<project name="HanFont" basedir=".">
+    <!-- SDK properties -->
+    <property name="FLEX_HOME" value="C:/sdk/flex_sdk_4.1.0.16076"/>
+    <property name="ADL" value="${FLEX_HOME}/bin/adl.exe"/>
+	<property name="mxmlc" value="${FLEX_HOME}/lib/mxmlc.jar"/>
+    <property name="ADT" value="${FLEX_HOME}/lib/adt.jar"/> 
+
+    <!-- Project properties -->
+	<property name="src" location="src" />
+	<property name="lib" location="lib" />
+	<property name="bin" location="bin" />
+	<property name="icons"  location="icons"/>
+	
+    <property name="APP_NAME" value="HanFont"/>
+    <property name="APP_ROOT_FILE" value="${APP_NAME}.swf"/>
+    <property name="APP_DESCRIPTOR" value="${APP_NAME}-app.xml"/>
+	<property name="APP_TEST_DESCRIPTOR" value="${APP_NAME}-test.xml"/>
+   
+    <property name="STORETYPE" value="pkcs12"/>
+    <property name="KEYSTORE" value="cert.p12"/>
+	<property name="PASSWORD" value="8fe#6bep!"/>
+	
+	<taskdef resource="flexTasks.tasks" classpath="${FLEX_HOME}/ant/lib/flexTasks.jar" />	
+
+    <target name="test" description="test" depends="compile">
+        <exec executable="${ADL}">
+		    <arg value="-profile"/>
+            <arg value="extendedDesktop"/>
+            <arg value="${APP_TEST_DESCRIPTOR}"/>
+            <arg value="${bin}"/>
+        </exec>
+    </target> 
+
+    <target name="keystore" description="make keystore">
+        <java jar="${ADT}" fork="true" failonerror="true">
+            <arg value="-certificate"/>
+            <arg value="-cn"/>
+            <arg value="SelfSigned"/>
+            <arg value="1024-RSA"/>
+            <arg value="${KEYSTORE}"/>
+            <arg value="${PASSWORD}"/>
+        </java>
+    </target> 
+
+    <target name="package" description="make package" depends="compile">
+        <java jar="${ADT}" fork="true" failonerror="true">
+            <arg value="-package"/>
+            <arg value="-storetype"/>
+            <arg value="${STORETYPE}"/>
+            <arg value="-keystore"/>
+            <arg value="${KEYSTORE}"/>
+        	<arg value="-storepass"/>
+        	<arg value="${PASSWORD}"/>
+            <arg value="${bin}/${APP_ROOT_FILE}"/>
+            <arg value="${APP_DESCRIPTOR}"/>
+        	<arg value="${icons}"/>
+        	<arg value="-C"/>
+            <arg value="${bin}"/>
+            <arg value="${APP_ROOT_FILE}"/>
+        </java>
+    </target>
+	
+	<target name="native-app" description="make native-app" depends="package">
+        <java jar="${ADT}" fork="true" failonerror="true">
+            <arg value="-package"/>
+            <arg value="-target"/>
+            <arg value="native"/>
+        	<arg value="${bin}/${APP_NAME}.exe"/>
+            <arg value="${bin}/${APP_NAME}.swf"/>
+        </java>
+    </target>
+	
+	<target name="compile" description="compile">
+		<!--
+        <java jar="${mxmlc}" fork="true" failonerror="true">
+        	<arg value="+flexlib"/>
+        	<arg value="${FLEX_HOME}/frameworks"/>
+        	<arg value="+configname=air"/>
+            <arg value="-o"/>
+            <arg value="${bin}/${APP_NAME}.swf"/>
+            <arg value="- -"/>
+            <arg value="${src}/Main.as"/>
+        </java>
+        -->
+		
+		<mxmlc file="${src}/Main.as"
+            output="${bin}/${APP_NAME}.swf"
+	    	debug="false"
+	    	target-player="10" 
+	    	optimize="true">
+	    	
+	    	<compiler.library-path dir="${lib}">
+	    		<include name="*.swc" />
+	    	</compiler.library-path>
+			
+            <load-config filename="${FLEX_HOME}/frameworks/air-config.xml"/>
+	    	
+            <source-path path-element="${FLEX_HOME}/frameworks"/>
+	    	<source-path path-element="${src}"/>
+        </mxmlc>
+		
+    </target> 
+</project>

@@ -1,0 +1,24 @@
+﻿HanFont
+
+A AIR app for Chinese Font Embeding in ActionScript.
+
+* 基于Adobe AIR 2.0全新开发；
+* 支持直接调用Flex SDK 3.x或4.x进行编译；
+* 支持拖拽的方式引用外部字体；
+* 内置各种汉字范围的预设；
+* 支持拖拽的方式导入文本文件；
+* 支持空白字符和非中文字符的过滤；
+* 可以选择输出单个变量或者整个类。
+
+- DOWNLOAD:
+
+v3.0
+http://kevincao.com/download/kevincao.com_HanFont_v3.0.zip
+
+- HOME PAGE:
+
+http://kevincao.com/2010/07/hanfont/
+
+- AUTHOR:
+
+Kevin Cao ( http://kevincao.com )

@@ -59,7 +59,7 @@ package
 			commandMap.mapEvent(AppEvent.CLOSE_SETTING, CloseSettingCommand, AppEvent);
 			commandMap.mapEvent(AppEvent.SHOW_ABOUT, ShowAboutCommand, AppEvent);
 			commandMap.mapEvent(CompileEvent.COMPILE_REQUEST, CompileCommand, CompileEvent);
-			commandMap.mapEvent(SaveEvent.SAVE, SaveConfigCommand);
+			commandMap.mapEvent(SaveEvent.SAVE, SaveConfigCommand, SaveEvent);
 			
 			super.startup();
 		}

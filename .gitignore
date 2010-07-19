@@ -17,7 +17,6 @@ fla/test/*
 .FlexUnitSettings
 .project
 
-build.xml
 Icon
 Thumbs.db
 cert.p12
