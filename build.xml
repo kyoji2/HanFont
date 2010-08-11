@@ -1,7 +1,7 @@
 ﻿<project name="HanFont" basedir=".">
     <!-- SDK properties -->
-    <property name="FLEX_HOME" value="C:/sdk/flex_sdk_4.1.0.16076"/>
-    <property name="ADL" value="${FLEX_HOME}/bin/adl.exe"/>
+    <property name="FLEX_HOME" value="/Users/kevincao/Documents/flex-sdk/4.1"/>
+    <property name="ADL" value="${FLEX_HOME}/bin/adl"/>
 	<property name="mxmlc" value="${FLEX_HOME}/lib/mxmlc.jar"/>
     <property name="ADT" value="${FLEX_HOME}/lib/adt.jar"/> 
 
@@ -20,16 +20,39 @@
     <property name="KEYSTORE" value="cert.p12"/>
 	<property name="PASSWORD" value="8fe#6bep!"/>
 	
+	<condition property="isWindows">
+		<os family="windows"/>
+	</condition>
+	<condition property="isMac">
+		<os family="mac"/>
+	</condition>
+	
 	<taskdef resource="flexTasks.tasks" classpath="${FLEX_HOME}/ant/lib/flexTasks.jar" />	
 
     <target name="test" description="test" depends="compile">
+        <antcall target="test-win"/>
+    	<antcall target="test-mac"/>
+    </target>
+	
+	<target name="test-win" if="isWindows">
+		<echo message="Windows"/>
+        <exec executable="${ADL}.exe">
+		    <arg value="-profile"/>
+            <arg value="extendedDesktop"/>
+            <arg value="${APP_TEST_DESCRIPTOR}"/>
+            <arg value="${bin}"/>
+        </exec>
+    </target>
+	
+	<target name="test-mac" if="isMac">
+		<echo message="Mac"/>
         <exec executable="${ADL}">
 		    <arg value="-profile"/>
             <arg value="extendedDesktop"/>
             <arg value="${APP_TEST_DESCRIPTOR}"/>
             <arg value="${bin}"/>
         </exec>
-    </target> 
+    </target>
 
     <target name="keystore" description="make keystore">
         <java jar="${ADT}" fork="true" failonerror="true">
@@ -51,7 +74,7 @@
             <arg value="${KEYSTORE}"/>
         	<arg value="-storepass"/>
         	<arg value="${PASSWORD}"/>
-            <arg value="${bin}/${APP_ROOT_FILE}"/>
+            <arg value="${bin}/${APP_NAME}.air"/>
             <arg value="${APP_DESCRIPTOR}"/>
         	<arg value="${icons}"/>
         	<arg value="-C"/>
@@ -60,13 +83,30 @@
         </java>
     </target>
 	
-	<target name="native-app" description="make native-app" depends="package">
+	<target name="native-app" depends="package" description="make native-app">
+		<antcall target="native-app-win"/>
+		<antcall target="native-app-mac"/>
+    </target>
+	
+	<target name="native-app-win" if="isWindows">
+		<echo message="Windows"/>
         <java jar="${ADT}" fork="true" failonerror="true">
             <arg value="-package"/>
             <arg value="-target"/>
             <arg value="native"/>
         	<arg value="${bin}/${APP_NAME}.exe"/>
-            <arg value="${bin}/${APP_NAME}.swf"/>
+            <arg value="${bin}/${APP_NAME}.air"/>
+        </java>
+    </target>
+	
+	<target name="native-app-mac" if="isMac">
+		<echo message="Mac"/>
+        <java jar="${ADT}" fork="true" failonerror="true">
+            <arg value="-package"/>
+            <arg value="-target"/>
+            <arg value="native"/>
+        	<arg value="${bin}/${APP_NAME}.dmg"/>
+            <arg value="${bin}/${APP_NAME}.air"/>
         </java>
     </target>
 	
