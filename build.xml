@@ -1,6 +1,11 @@
 ﻿<project name="HanFont" basedir=".">
+	<!-- set up a prefix for all environment variables -->
+	<property environment="env."/>
+	
     <!-- SDK properties -->
-    <property name="FLEX_HOME" value="/Users/kevincao/Documents/flex-sdk/4.1"/>
+	<!-- System environment must contain FLEX_HOME variable that points to Flex SDK -->
+	<property name="FLEX_HOME" location="${env.FLEX_HOME}"/>
+	
     <property name="ADL" value="${FLEX_HOME}/bin/adl"/>
 	<property name="mxmlc" value="${FLEX_HOME}/lib/mxmlc.jar"/>
     <property name="ADT" value="${FLEX_HOME}/lib/adt.jar"/> 
